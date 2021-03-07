@@ -1,3 +1,4 @@
+    
 class Node:
     def __init__(self, data):
         self.data = data
@@ -5,7 +6,6 @@ class Node:
     def __repr__(self):
         return f"{self.data}"
         
-
 
 class LinkedList:
     def __init__(self, nodes = None):
@@ -23,16 +23,16 @@ class LinkedList:
         if self.head is None:
             raise Exception('Linked list is empty')
 
-        if self.head == target_node:
-            self.head = None
+        if self.head.data == target_node.data:
+            self.head = self.head.next
         
         node = self.head
         while node is not None:
             first_node = node
-            second_node = self.head.next
-            if second_node is not None and second_node == target_node:
+            second_node = first_node.next
+            if second_node is not None and second_node.data == target_node.data:
                 first_node.next = second_node.next
-            
+                continue
             node = node.next
 
                 
@@ -91,4 +91,4 @@ class LinkedList:
         return " -> ".join(nodes)
     
     
-    
+
