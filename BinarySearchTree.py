@@ -43,7 +43,26 @@ class BST:
             print(str(current_node.value))
             self.test_list.append(current_node.value)   ####### for test
             self._print_tree(current_node.big_child)
+
     
+    def height(self):
+        if self.root != None:
+            self._height(self.root, 0)
+        else:
+            print("The height is 0")
+            return "The height is 0"
+        
+    def _height(self, current_node, current_height):
+        
+        if current_node == None: 
+            print(current_height) ####### for test
+            return current_height
+        
+        else:
+            left_height = self._height(current_node.little_child , current_height+1)
+            right_height = self._height(current_node.big_child , current_height+1)
+            return max(left_height, right_height)
+
 
 def test():
     import random
