@@ -64,6 +64,29 @@ class BST:
             return max(left_height, right_height)
 
 
+    def search(self, val):
+        if self.root is None:
+            return False
+        else:
+            self._search(self.root, val)
+    
+    def _search(self, current_node, val):
+        if current_node.value == val:
+            print('True') ##### for test
+            return True
+        
+        elif current_node.little_child != None and val < current_node.value:
+            return self._search(current_node.little_child , val)
+            
+        elif current_node.big_child != None and val > current_node.value:    
+            return self._search(current_node.big_child , val)
+
+        else:
+            print('False') ########## for test
+            return False
+
+
+
 def test():
     import random
 
