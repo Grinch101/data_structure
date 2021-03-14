@@ -14,28 +14,48 @@ class Node:
 
 class Heap:
     def __init__(self):
-        self._list = []
+        self._hash = {}
+    
+    def _left(self,i):
+        return 2 * i
+    
+    def _right(self,i):
+        return 2 * i + 1
         
     def get_list(self, lst):
-        for i in lst:
-            self._list.append(Node(i))
-        self._max_heapify()
+        for i , item in enumerate(lst, start=1):
+            self._hash[i] = Node(item)
+
+        self._build_heap()
     
-    
-    def _max_heapify(self):
+
+    def _max_heapify(self , index):
         
-        for index in range(0,len(self._list)//2):
-            
-            cur_node = self._list[index]
-            left_child = self._list[2*index]
-            right_child = self._list[2*index + 1]
-            
-            nodes_values = [cur_node.value , right_child.value, left_child.value]
-            largest_node = Node(nodes_values.pop(nodes_values.index(max(nodes_values)))) # :)))) fohsh nade!
-            
-            self._list[index] = largest_node
-            self._list[2*index] = Node(nodes_values.pop())
-            self._list[2*index + 1] = Node(nodes_values.pop())
+        heap_size = len(self._hash) 
+
+        if self._left(index) <= heap_size:
+            if self._left(index) <= heap_size and self._hash[self._left(index)].value < self._hash[index].value:
+                largest = index
+            else:
+                largest = self._left(index) # so far, the largest value has stored in the left child 
+
+        if self._right(index) <= heap_size:
+            if self._right(index) <= heap_size and self._hash[self._right(index)].value > self._hash[largest].value:
+                largest = self._right(index)
+        
+        if self._right(index) <= heap_size or self._left(index) <= heap_size:
+            if largest != index: #if true: store/ swap the largest value with index
+                self._hash[index] , self._hash[largest] = self._hash[largest] , self._hash[index]
+
+                self._max_heapify(largest) # check the same situation down the tree
+
     
+
+    def _build_heap(self):
+        for i in reversed(range(1 , len(self._hash)//2 + 1) ):
+            
+            self._max_heapify(i)
+        
+        
     def __repr__(self):
-        return self._list
+        return f'{list(self._hash.values())}'
