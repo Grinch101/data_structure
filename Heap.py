@@ -59,3 +59,4 @@ class Heap:
         
     def __repr__(self):
         return f'{list(self._hash.values())}'
+        
