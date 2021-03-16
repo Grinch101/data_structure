@@ -44,16 +44,27 @@ class Heap:
             
     
     def heap_sort(self):
+<<<<<<< HEAD
         from collections import deque
         
         if self._is_heap():
             
             _heapsort_array = deque()
+=======
+        
+        if self._is_heap():
+            
+            _heapsort_array = []
+>>>>>>> c633ee7a89a7ffc7738c077fce1b75ae2542b8e6
 
 
             for i in reversed(range(0, len(self._list))):
 
+<<<<<<< HEAD
                 _heapsort_array.appendleft(self._list[0])
+=======
+                _heapsort_array.append(self._list[0])
+>>>>>>> c633ee7a89a7ffc7738c077fce1b75ae2542b8e6
 
                 self._list[i] , self._list[0] = self._list[0], self._list[i]
 
