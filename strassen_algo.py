@@ -1,27 +1,28 @@
 import numpy as np
 import math 
 
-# find the closest power 2
-def closest_power(tup):
-    max_side = max(tup[0],tup[1])
-    i = 1
-    while True:
-        if math.log(max_side + i , 2) == round(math.log(max_side + i , 2)):
-            output = i + max_side
-            break
-        else: i += 1
-    return output
+# # find the closest power 2
+# def closest_power(tup):
+#     max_side = max(tup[0],tup[1])
+#     i = 1
+#     while True:
+#         if math.log(max_side + i , 2) == round(math.log(max_side + i , 2)):
+#             output = i + max_side
+#             break
+#         else: i += 1
+#     return output
 
 # squarify a mat and fill with zeros
 def squarify_and_split(mat):
-    shape = mat.shape
-    power = closest_power(shape)
+    # shape = mat.shape
+    # power = closest_power(shape)
     
-    # define a Zero matrix:
-    square_mat = np.zeros((power,power))
-    # broadcast:
-    square_mat[:shape[0] , :shape[1]] = mat
+    # # define a Zero matrix:
+    # square_mat = np.zeros((power,power))
+    # # broadcast:
+    # square_mat[:shape[0] , :shape[1]] = mat
     
+    square_mat = mat
     new_shape = mat.shape
     row = new_shape[0]//2
     col = new_shape[1]//2
