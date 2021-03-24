@@ -75,7 +75,7 @@ def bucket_sort(arr, max_int=None):
         sorted_vals = sorted_vals + ll
 
     sorted_vals = np.array(sorted_vals) * (max_int+1)
-    return list(sorted_vals.astype(int))
+    return list(sorted_vals)
 
 
 # test
