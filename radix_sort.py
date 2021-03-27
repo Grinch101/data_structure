@@ -77,8 +77,10 @@ class INT(int):
 
 @timeit
 def radix_sort(arr):
-    d_size = max(set([len(INT(i)) for i in arr]))
-
+    d_size = [len(INT(i)) for i in arr] 
+    quick_sort(d_size)
+    d_size = d_size[-1]
+    
     for d in range(0, d_size):
 
         buckets = ['empty' for i in range(0, 10)]
