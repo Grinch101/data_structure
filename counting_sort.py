@@ -61,22 +61,11 @@ def getUnique(arr):
 def countingSort(arr):
 # in counting sort we need to know some information about the array.
 # we need to know number of unique numbers in the array to have O(n+k)
-    
     uniques = getUnique(arr) # O(n)
-    
     quick_sort(uniques) # O(nlog(n))
+
     # count unique values cumulitavely
     count_hash = {  item:_count(arr,item)  for item in uniques } # O(n*k)
-
-    # count_list = [ _count(arr, item) for item in uniques]
-    
-    # count_list = []
-    # cumu_count = 0
-    # for num in uniques:
-    #     cumu_count += _count(arr, num)
-    #     count_list.append(cumu_count)
-
-
     output = []
     for item in uniques: # O(n)
         occurance = count_hash[item]
