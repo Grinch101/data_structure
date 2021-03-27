@@ -1,4 +1,8 @@
-def quick_sort(arr, first, last):
+def quick_sort(arr, first=None, last=None):
+    if first == None:
+        first = 0
+    if last == None:
+        last = len(arr) - 1
 
     import random
 
