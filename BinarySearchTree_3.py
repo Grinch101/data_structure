@@ -196,58 +196,60 @@ class BinarySearchTree:
     def delete(self, val):
                
         # case 1 - if node has no children:
-        node = self.find(val) # find the node
-        parent_node = node.parent # find its parent
-        if node.right is None and node.left is None: # if has no child
-            if parent_node < node or node.parent == node:    # if the node to be deleted is the right node:
-                parent_node.right = None
-            else:
-                parent_node.left = None
-        
-        # case 2 - if node has 1 child: (a left child)
-        elif node.left is not None and node.right is None:
-            attr = self.relation(node)
-            setattr(parent_node, attr, node.left)
-
-        #  if node has 1 child: (a right node)
-        elif node.left is None and node.right is not None:
-            attr = self.relation(node)
-            setattr(parent_node, attr, node.right)
-
-        ## if node has two children:
-        # if node to be delete is a right child:
-        elif node.left is not None and node.right is not None:
+        node = self.find(val)
+        if node: # find the node
             
-            # save parents and left child of the left node
-            LEFT = node.left
-            PARENT = node.parent
-            # disconnect its relation with other (left, parent):
-            attr = self.relation(node)
-            node.left = None
-            node.parent = None
-
-            # introduce the new node:
-            new_node = node.right
-            # save OLD left:
-            LEFT2 = new_node.left
-            # inherit the heir of removed node
-            new_node.left = LEFT
-            LEFT.parent = new_node
-            new_node.parent = PARENT
-            setattr(PARENT, attr, new_node)
+            parent_node = node.parent # find its parent
+            if node.right is None and node.left is None: # if has no child
+                if parent_node < node or node.parent == node:    # if the node to be deleted is the right node:
+                    parent_node.right = None
+                else:
+                    parent_node.left = None
             
+            # case 2 - if node has 1 child: (a left child)
+            elif node.left is not None and node.right is None:
+                attr = self.relation(node)
+                setattr(parent_node, attr, node.left)
 
-            # iterativly we must connect push down left branch by 1 node:
-            X = new_node.right
-            while X.left is not None and X.right is not None:
-                
-                X.left = LEFT2
-                LEFT2.parent = X
-                
-                X.parent = new_node
+            #  if node has 1 child: (a right node)
+            elif node.left is None and node.right is not None:
+                attr = self.relation(node)
+                setattr(parent_node, attr, node.right)
 
-                LEFT2 = X.left
-                X = X.right 
+            ## if node has two children:
+            # if node to be delete is a right child:
+            elif node.left is not None and node.right is not None:
+                # save parents and left child of the node
+                LEFT = node.left
+                PARENT = node.parent
+                # disconnect its relation with other (left, parent):
+                attr = self.relation(node)
+                # introduce the new node:
+                new_node = node.right
+                # save the left branch before glueing to old LEFT - we need it for right node which is being shifted up:
+                if new_node.left:
+                    LEFT2 = new_node.left
+                # inherit the removed node's relationship
+                new_node.left = LEFT
+                LEFT.parent = new_node
+                new_node.parent = PARENT
+                setattr(PARENT, attr, new_node)
+
+                # iterativly we must connect push up right node by 1:
+                if new_node.right:
+                    X = new_node.right
+                    while True: 
+                        X.left = LEFT2 # right_node_number_2 inheriting the left from right_node_number_1
+                        LEFT2.parent = X
+                        
+                        X.parent = new_node
+                        LEFT2 = X.left
+                        
+                        if X.right is None or X.left is None:
+                            break
+                        X = X.right
+        else:
+            raise Exception( "Node not found!" )
 
 
 ############## test
@@ -264,10 +266,10 @@ for i in range(num):
     BST.insert(X)
     print('X is',X)
     BST.plot
-    time.sleep(0.08)
+    time.sleep(0.008)
     if i < num - 1:
         cls()
 
-BST.delete(130)
+BST.delete(177)
 BST.plot
 
