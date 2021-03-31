@@ -1,8 +1,9 @@
-### new_version of BST, rewritten by me / first commit
-
 # Basic operations on a binary search tree take time proportional to the height of the tree.
 # For a complete binary tree with n nodes, such operations run in O(log(n)) worst-case time.
 # If the tree is a linear chain of n nodes, however, the same operations take O(n) worst-case time.
+# Every node in this data structure has three relation with others. 
+# A node has a "parent" , a "left" and a "right" child, ensuring the right child always is larager than the node
+# and the left child is always smaller than the node itself.
 
 class Node:
     def __init__(self, data):
@@ -195,15 +196,15 @@ class BinarySearchTree:
 
     def delete(self, val):
                
-        # case 1 - if node has no children:
         node = self.find(val)
         if node: # find the node
-            
+
             parent_node = node.parent # find its parent
-            if node.right is None and node.left is None: # if has no child
+                    # case 1 - if node has no children:
+            if node.right is None and node.left is None: 
                 if parent_node < node or node.parent == node:    # if the node to be deleted is the right node:
                     parent_node.right = None
-                else:
+                else:                                             # if the node to be deleted is the left node:
                     parent_node.left = None
             
             # case 2 - if node has 1 child: (a left child)
@@ -222,8 +223,8 @@ class BinarySearchTree:
                 # save parents and left child of the node
                 LEFT = node.left
                 PARENT = node.parent
-                # disconnect its relation with other (left, parent):
-                attr = self.relation(node)
+
+                attr = self.relation(node) # get the relation between child and the parent (either right or left)
                 # introduce the new node:
                 new_node = node.right
                 # save the left branch before glueing to old LEFT - we need it for right node which is being shifted up:
@@ -252,7 +253,7 @@ class BinarySearchTree:
             raise Exception( "Node not found!" )
 
 
-############## test
+############## debug
 BST = BinarySearchTree()
 import random
 import time
