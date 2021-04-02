@@ -1,36 +1,21 @@
+# Because each of the triply-nested for loops runs exactly n iterations,
+#  and each execution takes constant time, the SQUARE-MATRIX-MULTIPLY procedure takes O(n^3) time.
+#   You might at first think that any matrix multiplication algorithm must take O(n^3) time,
+#   since the natural definition of matrix multiplication requires that many multiplications.
+#    You would be incorrect, however: we have a way to multiply matrices in O(n^3) time.
+#     We shall see Strassen’s remarkable recursive algorithm for multiplying n x n matrices.
+#     It runs in O(n^lg7) time, Strassen’s algorithm runs in O(n^2.81) time,
+#      which is asymptotically better than the simple SQUARE-MATRIXMULTIPLY procedure.
+
 import numpy as np
-import math 
 
-# # find the closest power 2
-# def closest_power(tup):
-#     max_side = max(tup[0],tup[1])
-#     i = 1
-#     while True:
-#         if math.log(max_side + i , 2) == round(math.log(max_side + i , 2)):
-#             output = i + max_side
-#             break
-#         else: i += 1
-#     return output
-
-# squarify a mat and fill with zeros
 def squarify_and_split(mat):
-    # shape = mat.shape
-    # power = closest_power(shape)
-    
-    # # define a Zero matrix:
-    # square_mat = np.zeros((power,power))
-    # # broadcast:
-    # square_mat[:shape[0] , :shape[1]] = mat
-    
-    square_mat = mat
-    new_shape = mat.shape
-    row = new_shape[0]//2
-    col = new_shape[1]//2
 
-    return square_mat[:row,:col], square_mat[:row, col:2*col], square_mat[row:2*row, :col] , square_mat[row:2*row, col:2*col]
+    n = int(mat.shape[0]/2)
+    return mat[:n,:n], mat[:n, n:], mat[n:, :n], mat[n:, n:]
 
 def strassen_multiply(A, B):
-    if len(A) == 1:
+    if A.shape[0] == 1:
         return A*B
     else:
         a,b,c,d = squarify_and_split(A)
