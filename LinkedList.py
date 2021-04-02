@@ -1,4 +1,9 @@
-    
+# LinkedList:
+# To search a list of n objects, the LIST-SEARCH procedure takes O(n) time in the worst case, since it may have to search the entire list.
+# The running time for LISTINSERT on a list of n elements is O(1).
+## LIST-DELETE runs in O(1) time, but if we wish to delete an element with a given key,
+## O(n) time is required in the worst case because we must first call LIST-SEARCH to find the element.
+
 class Node:
     def __init__(self, data):
         self.data = data
@@ -8,39 +13,50 @@ class Node:
         
 
 class LinkedList:
-    def __init__(self, nodes = None):
+    def __init__(self, vals = None):
         self.head = None
+        # from collections.abc import Iterable
+
+        # if isinstance(vals, Iterable):
+        head = Node(vals.pop(0))
+        self.head = head
+
+        prev_node = self.head
+        while len(vals) != 0:
+            node = Node(vals.pop(0))
+            prev_node.next = node
+
+            prev_node = node
+    
+    def remove(self, item, type='int'):
+        if type == "Node":
+            val = item.data
+        else:
+            val = item
         
-        if nodes is not None:
-            node = Node(nodes.pop(0))
-            self.head = node
-            for item in nodes:
-                
-                node.next = Node(item)
-                node = node.next
-                
-    def remove(self, target_node):
         if self.head is None:
             raise Exception('Linked list is empty')
 
-        if self.head.data == target_node.data:
+        elif self.head.data == val:
             self.head = self.head.next
         
-        node = self.head
-        while node is not None:
-            first_node = node
-            second_node = first_node.next
-            if second_node is not None and second_node.data == target_node.data:
-                first_node.next = second_node.next
-                continue
-            node = node.next
-
-                
-    def add_left(self, node):
+        else:
+            node = self.head
+            while node is not None:
+                first_node = node
+                second_node = first_node.next
+                if second_node is not None and second_node.data == val:
+                    first_node.next = second_node.next
+                    break
+                node = node.next
+  
+    def add_left(self, val):
+        node = Node(val)
         node.next = self.head
         self.head = node
     
-    def add_right(self, new_node):
+    def add_right(self, val):
+        new_node = Node(val)
         node = self.head
         while True:
             next_node = node.next
@@ -62,33 +78,40 @@ class LinkedList:
             raise Exception('Linked list is empty')
         node = self.head
         while True:
-            if node.next is not None:
-                node = node.next
-            else:
+            if node.next is None:
                 output = node
-                self.remove(node)
+                self.remove(node, type='Node')
                 break
-        return output
-        
+            else:
+                node = node.next
                 
-            
+        return output
         
     def __iter__(self):
         node = self.head
-        cond = True
         while node is not None:
             yield node
             node = node.next
         
-    
     def __repr__(self):
-        node = self.head
-        nodes = []
-        while node is not None:
-            nodes.append(node.data)
-            node = node.next
-        nodes.append("None")
-        return " -> ".join(nodes)
-    
-    
 
+        output =  f'{self.head}'
+        node = self.head.next
+        while node is not None:
+            output = output + f" →  {node.data}"
+            node = node.next
+        return output
+    
+########## debug
+ll = LinkedList([1,2,3,4,5])
+print(ll)
+ll.add_right(222)
+print(ll)
+ll.add_left('left')
+print(ll)
+ll.remove(3)
+print(ll)
+ll.pop_left()
+print(ll)
+ll.pop_right()
+print(ll)
