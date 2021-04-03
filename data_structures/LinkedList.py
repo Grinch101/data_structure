@@ -4,29 +4,19 @@
 ## LIST-DELETE runs in O(1) time, but if we wish to delete an element with a given key,
 ## O(n) time is required in the worst case because we must first call LIST-SEARCH to find the element.
 
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None    
-    def __repr__(self):
-        return f"{self.data}"
-        
+from Node import Node
 
 class LinkedList:
     def __init__(self, vals = None):
         self.head = None
-        # from collections.abc import Iterable
 
-        # if isinstance(vals, Iterable):
-        head = Node(vals.pop(0))
-        self.head = head
+        if type(vals) == list:
+            head = Node(vals.pop(0))
+            self.head = head
+            for item in vals:
+                self.add_left(item)
 
-        prev_node = self.head
-        while len(vals) != 0:
-            node = Node(vals.pop(0))
-            prev_node.next = node
 
-            prev_node = node
     
     def remove(self, item, type='int'):
         if type == "Node":
@@ -49,23 +39,24 @@ class LinkedList:
                     first_node.next = second_node.next
                     break
                 node = node.next
-  
+
     def add_left(self, val):
         node = Node(val)
         node.next = self.head
         self.head = node
     
     def add_right(self, val):
-        new_node = Node(val)
-        node = self.head
-        while True:
-            next_node = node.next
-            if next_node == None:
-                node.next = new_node
-                break
-            else:
-                node = node.next
-    
+        if self.head is None:
+            self.head = Node(val)
+        else:
+            node = self.head
+            while True:
+                if node.next is None:
+                    node.next = Node(val)
+                    break
+                else:
+                    node = node.next
+            
     def pop_left(self):
         if self.head is None:
             raise Exception('Linked list is empty')
@@ -96,22 +87,22 @@ class LinkedList:
     def __repr__(self):
 
         output =  f'{self.head}'
-        node = self.head.next
+        node = self.head
         while node is not None:
             output = output + f" →  {node.data}"
             node = node.next
         return output
     
 ########## debug
-ll = LinkedList([1,2,3,4,5])
-print(ll)
-ll.add_right(222)
-print(ll)
-ll.add_left('left')
-print(ll)
-ll.remove(3)
-print(ll)
-ll.pop_left()
-print(ll)
-ll.pop_right()
-print(ll)
+# ll = LinkedList([1,2,3,4,5])
+# print(ll)
+# ll.add_right(222)
+# print(ll)
+# ll.add_left('left')
+# print(ll)
+# ll.remove(3)
+# print(ll)
+# ll.pop_left()
+# print(ll)
+# ll.pop_right()
+# print(ll)

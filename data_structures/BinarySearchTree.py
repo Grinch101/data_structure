@@ -4,25 +4,14 @@
 # Every node in this data structure has three relation with others. 
 # A node has a "parent" , a "left" and a "right" child, ensuring the right child always is larager than the node
 # and the left child is always smaller than the node itself.
+from structures.Node import Node
 
-class Node:
+class Node(Node):
     def __init__(self, data):
         self.data = data
         self.parent = None
         self.left = None
         self.right = None
-    
-    def __lt__(self, other):
-        return self.data < other.data
-    
-    def __eq__(self, other):
-        return self.data == other.data
-        
-    def __gt__(self, other):
-        return self.data > other.data
-    
-    def __ne__(self, other):
-        return self.data != other.data
 
     def __repr__(self):
         return f"{self.parent} → {self.data}"
@@ -253,24 +242,24 @@ class BinarySearchTree:
             raise Exception( "Node not found!" )
 
 
-############## debug
-BST = BinarySearchTree()
-import random
-import time
-from os import system
-cls = lambda: system('cls')
-cls()
-random.seed(11)
-num = 50
-for i in range(num):
-    X = random.randint(0,200)
-    BST.insert(X)
-    print('X is',X)
-    BST.plot
-    time.sleep(0.008)
-    if i < num - 1:
-        cls()
+# ############## debug
+# BST = BinarySearchTree()
+# import random
+# import time
+# from os import system
+# cls = lambda: system('cls')
+# cls()
+# random.seed(11)
+# num = 50
+# for i in range(num):
+#     X = random.randint(0,200)
+#     BST.insert(X)
+#     print('X is',X)
+#     BST.plot
+#     time.sleep(0.008)
+#     if i < num - 1:
+#         cls()
 
-BST.delete(177)
-BST.plot
+# BST.delete(177)
+# BST.plot
 

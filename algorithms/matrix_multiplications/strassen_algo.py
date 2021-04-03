@@ -39,11 +39,11 @@ def strassen_multiply(A, B):
         return C
     
 ########################
-# test:
-A = np.array([i for i in range(1,17)]).reshape((4,4))
-B = np.array([i for i in range(1,17)]).reshape((4,4))
+# # test:
+# A = np.array([i for i in range(1,17)]).reshape((4,4))
+# B = np.array([i for i in range(1,17)]).reshape((4,4))
 
-C_1 = strassen_multiply(A,B)
-C_2 = np.dot(A,B)
+# C_1 = strassen_multiply(A,B)
+# C_2 = np.dot(A,B)
 
-print(C_1 == C_2)
+# print(C_1 == C_2)
