@@ -1,9 +1,10 @@
 from utilities.decor import timeit
 from utilities.datatypes import INT
-from .quick_sort import quick_sort
+from quick_sort import quick_sort
+
 
 def flatten(arr):
-    def list_checker(x): return type(x) is list
+    list_checker = lambda x : type(x) is list
 
     while any(list(map(list_checker, arr))):
         lst = []
@@ -22,13 +23,12 @@ def flatten(arr):
     return lst  # O(n*k) k is max of _len
 
 
-
 @timeit
 def radix_sort(arr):
-    d_size = [len(INT(i)) for i in arr] 
+    d_size = [len(INT(i)) for i in arr]
     quick_sort(d_size)
     d_size = d_size[-1]
-    
+
     for d in range(0, d_size):
 
         buckets = ['empty' for i in range(0, 10)]
@@ -44,9 +44,9 @@ def radix_sort(arr):
     return arr
 
 ###################
-## test:
+# test:
 
-arr = [802,12,0,1, 23, 404, 55, 67, 88, 980]
+
+arr = [802, 12, 0, 1, 23, 404, 55, 67, 88, 980]
 arr = radix_sort(arr)
-print(sorted(arr) == arr)
 print(arr)

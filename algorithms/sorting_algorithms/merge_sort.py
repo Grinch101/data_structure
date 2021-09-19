@@ -60,6 +60,6 @@ def merge_sort( arr):
             j += 1
     return arr
 
-# # test:
-# mg = merge_sort([9, 6, 4, 2, 0, 3, 1, 7, 8])
-# print(mg)
+# test:
+mg = merge_sort([9, 6, 4, 2, 0, 3, 1, 7, 8])
+print(mg)

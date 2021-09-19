@@ -10,15 +10,15 @@
 
 # from data_structures.LinkedList import LinkedList
 from quick_sort import quick_sort
-from  data_structures import LinkedList
+from data_structures import LinkedList
 
-def bucket_sort(arr, max_num, standardized = False):
+def bucket_sort(arr, max_num, standardized=False):
     if not standardized:
         for i in range(len(arr)):
             arr[i] = arr[i] / (max_num)  # standardize
     else:
         max_num = 1
-    ## create 10 buckets:
+    # create 10 buckets:
     buckets = [LinkedList.LinkedList() for i in range(0, 10)]
     # print(buckets)
     # determine each item's bucket and assign it to that:
@@ -37,4 +37,6 @@ def bucket_sort(arr, max_num, standardized = False):
     for i in range(len(sorted_vals)):
         sorted_vals[i] = ((sorted_vals[i]) * (max_num))
     return sorted_vals
-    
+
+
+print(bucket_sort([8, 7, 6, 3, 5, 2,8],9))

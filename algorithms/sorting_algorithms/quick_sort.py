@@ -4,6 +4,26 @@
 # expected running time is O(nlog(n)), and the constant factors hidden in the O(nlog(n))
 # notation are quite small.
 
+import random
+
+def partition(arr, first, last):
+    if last > first:
+        pivot = random.randint(first, last)
+        # randomly choose pivot to ensure O(nlog(n))
+
+        pivot_val = arr[pivot]
+        # put pivot in the first index and compare the rest with it:
+        arr[first], arr[pivot] = arr[pivot], arr[first]
+
+        border = first
+        for idx in range(first, last+1):
+            if arr[idx] < pivot_val:
+                border += 1
+                arr[idx], arr[border] = arr[border], arr[idx]
+
+        arr[first], arr[border] = arr[border], arr[first]
+
+        return border
 
 
 def quick_sort(arr, first=None, last=None):
@@ -12,26 +32,6 @@ def quick_sort(arr, first=None, last=None):
     if last == None:
         last = len(arr) - 1
 
-    import random
-
-    def partition(arr, first, last):
-        if last > first:
-            pivot = random.randint(first, last)
-            # randomly choose pivot to ensure O(nlog(n))
-
-            pivot_val = arr[pivot]
-            # put pivot in the first index and compare the rest with it:
-            arr[first], arr[pivot] = arr[pivot], arr[first]
-
-            border = first
-            for idx in range(first, last+1):
-                if arr[idx] < pivot_val:
-                    border += 1
-                    arr[idx], arr[border] = arr[border], arr[idx]
-
-            arr[first], arr[border] = arr[border], arr[first]
-
-            return border
 
     if last > first:
 
@@ -42,7 +42,7 @@ def quick_sort(arr, first=None, last=None):
     return arr
 ################
 # test
-# arr = [17, 41, 5, 22, 54, 6, 29, 3, 13]
-# quick_sort(arr, 0, 8)
-# print(arr)
-# print(arr == sorted(arr))
+arr = [17, 41, 5, 22, 54, 6, 29, 3, 13]
+quick_sort(arr, 0, 8)
+print(arr)
+

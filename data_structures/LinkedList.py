@@ -4,7 +4,7 @@
 ## LIST-DELETE runs in O(1) time, but if we wish to delete an element with a given key,
 ## O(n) time is required in the worst case because we must first call LIST-SEARCH to find the element.
 
-from Node import Node
+from data_structures.Node import Node
 
 class LinkedList:
     def __init__(self, vals = None):

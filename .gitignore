@@ -1,8 +1,3 @@
-__pycache__/LinkedList.cpython-39.pyc
-__pycache__/Node.cpython-39.pyc
-__pycache__/quicksort.cpython-39.pyc
+__pycache__
 test.py
-algorithms/sorting_algorithms/__pycache__/quick_sort.cpython-39.pyc
-algorithms/sorting_algorithms/__pycache__/__init__.cpython-39.pyc
-algorithms/sorting_algorithms/__pycache__/quick_sort.cpython-39.pyc
-algorithms/sorting_algorithms/__pycache__/__init__.cpython-39.pyc
+data_structure.egg-info
