@@ -3,6 +3,7 @@
 ## devide the array into half until the len of array is 1 and the item is found.
 ## worst  omplexity O(n)
 ## general complexity O(h) - h is the height of the tree
+
 def binary_search(arr, item, upper_ind = None, lower_ind = None):
 
     if upper_ind == None or lower_ind == None:
