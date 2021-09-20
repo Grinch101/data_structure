@@ -87,7 +87,7 @@ class LinkedList:
     def __repr__(self):
 
         output =  f'{self.head}'
-        node = self.head
+        node = self.head.next
         while node is not None:
             output = output + f" →  {node.data}"
             node = node.next
@@ -98,7 +98,7 @@ class LinkedList:
 # print(ll)
 # ll.add_right(222)
 # print(ll)
-# ll.add_left('left')
+# ll.add_left(111)
 # print(ll)
 # ll.remove(3)
 # print(ll)
